@@ -1,10 +1,11 @@
 #!/usr/bin/php
 <?php
-use xPaw\MinecraftQuery;
-use xPaw\MinecraftQueryException;
 
 ini_set('display_errors','on');
 include 'common.php';
+
+use xPaw\MinecraftQuery;
+use xPaw\MinecraftQueryException;
 
 $status = new MinecraftServerStatus();
  

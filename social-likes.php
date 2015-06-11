@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 include 'common.php';
 
@@ -27,5 +28,7 @@ foreach ($servers as $server) {
 		$pdo->query($query)->execute();	
 	}
 }
+
+$query->closeCursor(); 
 
 echo '<h1>finish!</h1>';

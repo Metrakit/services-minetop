@@ -6,8 +6,6 @@ include 'common.php';
 
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
-
-$status = new MinecraftServerStatus();
  
 $query = $pdo->query("SELECT id, ip, port FROM servers WHERE top_server_id = 1 AND ip IS NOT NULL");
 $query->execute();
@@ -25,7 +23,7 @@ foreach ($servers as $server) {
     }
 
     try {
-        $server_infos->Connect($server['ip'], $server['port']);
+        $server_infos->Connect($server['ip'], $server['port'], 1);
 
         print_r($server_infos->GetInfo());
         print_r($server_infos->GetPlayers());

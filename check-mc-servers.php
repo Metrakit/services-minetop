@@ -23,10 +23,10 @@ foreach ($servers as $server) {
     }
 
     try {
-        $server_infos->Connect($server['ip'], $server['port'], 1);
+        $server_infos->Connect($server['ip'], $server['port'], 3);
 
-        print_r($server_infos->GetInfo());
-        print_r($server_infos->GetPlayers());
+        var_dump($server_infos->GetInfo());
+        var_dump($server_infos->GetPlayers());
     } catch(MinecraftQueryException $e) {
         echo $e->getMessage();
     }

@@ -1,23 +1,34 @@
 #!/usr/bin/php
 <?php
+use xPaw\MinecraftQuery;
+use xPaw\MinecraftQueryException;
+
+ini_set('display_errors','on');
 include 'common.php';
-include('vendor/minecraftStatus.php');
 
 $status = new MinecraftServerStatus();
  
-$query = $pdo->query("SELECT * FROM servers WHERE top_server_id = 1 AND WHERE ip IS NOT NULL");
-
-$servers = $query->fetchAll()
+$query = $pdo->query("SELECT id, ip, port FROM servers WHERE top_server_id = 1 AND ip IS NOT NULL");
+$query->execute();
+$servers = $query->fetchAll();
 $query->closeCursor(); 
 
-foreach ($servers as $server)
-
-    $response = $status->getStatus($server['ip']);
+foreach ($servers as $server) {
 
     echo 'server : ' . $server['id'] . PHP_EOL;
-    if ($response) {
-        echo 'players : ' . $response['players'] . PHP_EOL;
-        echo 'ping : ' . $response['ping'] . PHP_EOL;
-    } 
 
+    $server_infos = new MinecraftQuery();
+
+    if (is_null($server['port'])) {
+    	$server['port'] = 25565;
+    }
+
+    try {
+        $server_infos->Connect($server['ip'], $server['port']);
+
+        print_r($server_infos->GetInfo());
+        print_r($server_infos->GetPlayers());
+    } catch(MinecraftQueryException $e) {
+        echo $e->getMessage();
+    }
 }

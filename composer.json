@@ -1,0 +1,15 @@
+{
+    "name": "metrakit/services-minetop",
+    "description": "Services for minetop",
+    "authors": [
+        {
+            "name": "Jordane Jouffroy",
+            "email": "contact@jordane.net"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0",
+        "xpaw/php-minecraft-query": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
